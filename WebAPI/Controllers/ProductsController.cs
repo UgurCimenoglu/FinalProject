@@ -26,12 +26,12 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            
+
             var result = _productService.GetAll();
 
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }
@@ -40,6 +40,19 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int productid)
         {
             var result = _productService.GetById(productid);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
+
+        [HttpGet("getallbycategoryid")]
+        public IActionResult GetAllByCategoryId(int categoryid)
+        {
+            var result = _productService.GetAllByCategoryId(categoryid);
             if (result.Success)
             {
                 return Ok(result);
